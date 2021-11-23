@@ -1,0 +1,199 @@
+<!-- 
+  Author: Amritpal Singh 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jenny's Bookstore</title>
+
+    <!-- Start Bootstrap CDN  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- End Bootstrap CDN -->
+
+    <!-- Start Link to External CSS File  -->
+    <link rel="stylesheet" href="shop.css" />
+    <!-- End Link to External CSS File  -->
+
+    <!-- Start jQuery CDN  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- End jQuery CDN  -->
+</head>
+
+<body>
+    <!-- Start Header -->
+    <header>
+        <h2>Welcome to Jenny's Bookstore</h2>
+        <h3>One Place For All <b>Basic Stationery</b></h3>
+    </header>
+    <!-- End Header -->
+    <!-- Start Main -->
+    <main>
+        <!-- Start Sale Form -->
+        <form id="salesForm" class="row g-3" onsubmit="return checkout()">
+            <!-- Start Sale Details  -->
+            <div id="saleDetails">
+                <!-- Start Customer Name  -->
+                <div class="mb-3 row">
+                    <label for="customerName" class="col-sm-6 col-form-label">Customer Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="customerName" placeholder="First Last" />
+                    </div>
+                </div>
+                <!-- End Customer Name  -->
+                <!-- Start Customer Number  -->
+                <div class="mb-3 row">
+                    <label for="customerNumber" class="col-sm-6 col-form-label">Customer Number</label>
+                    <div class="col-sm-6 has-validation">
+                        <input type="text" class="form-control" id="customerNumber" placeholder="XX-NNN-NN"
+                            maxlength="9" style="text-transform:uppercase" />
+                        <!-- using customerNumberHyphen function to add hyphen at position 3 and 7 -->
+                    </div>
+                </div>
+                <!-- End Customer Number  -->
+
+                <!-- Start Sale_Item 1 -->
+                <div class="mb-3 row">
+                    <label for="notebooks" class="col-sm-6 col-form-label">Number of Notebooks ($12.00)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control saleItems" id="notebooks" placeholder="10" />
+                    </div>
+                </div>
+                <!-- End Sale_Item 1 -->
+
+                <!-- Start Sale_Item 2 -->
+                <div class="mb-3 row">
+                    <label for="pens" class="col-sm-6 col-form-label">Number of Pens ($2.50)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control saleItems" id="pens" placeholder="10" />
+                    </div>
+                </div>
+                <!-- End Sale_Item 2 -->
+
+                <!-- Start Sale_Item 3 -->
+                <div class="mb-3 row">
+                    <label for="bags" class="col-sm-6 col-form-label">Number of Bags ($32.50)</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control saleItems" id="bags" placeholder="10" />
+                    </div>
+                </div>
+                <!-- End Sale_Item 3 -->
+            </div>
+            <!-- End Sale Details  -->
+
+            <!-- Start Submit Button  -->
+            <div id="submitButton" class="d-grid gap-2">
+                <input type="submit" class="btn btn-dark" id="submit" value="Checkout">
+            </div>
+            <!-- End Submit Button -->
+
+            <!-- Start Errors Placeholder  -->
+            <p id="errors"></p>
+            <!-- End Errors Placeholder -->
+        </form>
+        <!-- End Sales Form -->
+
+        <!-- Start Receipt Section -->
+        <div id="receipt">
+            <!-- Start Customer Details Section -->
+            <div id="receiptCustomerDetails">
+                <table class="table">
+                    <!-- Start Customer Name -->
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td id="receiptCustomerName"></td>
+                    </tr>
+                    <!-- End Customer Name -->
+                    <!-- Start Customer Credit Card Info -->
+                    <tr>
+                        <th scope="row">Customer Number</th>
+                        <td id="receiptCustomerNumber"></td>
+                    </tr>
+                    <!-- End Customer Credit Card Info -->
+                </table>
+            </div>
+            <!-- End Customer Details Section  -->
+
+            <!-- Start Receipt Table -->
+            <table class="table">
+                <!-- Start Receipt Headers -->
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col" style="text-align: right;">Unit Price</th>
+                        <th scope="col" style="text-align: right;">Total Price</th>
+                    </tr>
+                </thead>
+                <!-- End Receipt Headers -->
+                <!-- Start Receipt Body -->
+                <tbody>
+                    <!-- Start Receipt_Item 1 -->
+                    <tr id="receiptNotebooks" style="display: none;">
+                        <th scope="row">Notebooks</th>
+                        <td id="notebooksQuantity" style="text-align: center;"></td>
+                        <td id="notebooksUnitPrice" style="text-align: right;"></td>
+                        <td id="notebooksTotalPrice" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Receipt_Item 1 -->
+                    <!-- Start Receipt_Item 2 -->
+                    <tr id="receiptPens" style="display: none;">
+                        <th scope="row">Pens</th>
+                        <td id="pensQuantity" style="text-align: center;"></td>
+                        <td id="pensUnitPrice" style="text-align: right;"></td>
+                        <td id="pensTotalPrice" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Receipt_Item 2 -->
+                    <!-- Start Receipt_Item 3 -->
+                    <tr id="receiptBags" style="display: none;">
+                        <th scope="row">Bags</th>
+                        <td id="bagsQuantity" style="text-align: center;"></td>
+                        <td id="bagsUnitPrice" style="text-align: right;"></td>
+                        <td id="bagsTotalPrice" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Receipt_Item 3 -->
+                    <!-- Start Receipt Total Before tax -->
+                    <tr id="receiptTotalBeforeTax">
+                        <th scope="row" colspan="3" style="text-align: right;">Total Amount (excl. Tax)</th>
+                        <td id="totalPriceBeforeTax" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Receipt Total Before Tax -->
+                    <!-- Start Tax Amount -->
+                    <tr id="receiptTax">
+                        <th scope="row" colspan="2"></th>
+                        <td id="taxPercentage" style="text-align: right; font-weight: bold;"></td>
+                        <td id="taxAmount" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Tax Amount -->
+                    <!-- Start Receipt Total After Tax  -->
+                    <tr id="receiptTotalAfterTax">
+                        <th scope="row" colspan="3" style="text-align: right;">Total Amount (incl. Tax)</th>
+                        <td id="totalPriceAfterTax" style="text-align: right;"></td>
+                    </tr>
+                    <!-- End Receipt Total After Tax -->
+                </tbody>
+                <!-- End Receipt Body  -->
+            </table>
+            <!-- End Receipt Table -->
+        </div>
+        <!-- End Receipt Section -->
+    </main>
+    <!-- End Main -->
+    <!-- Start Footer -->
+    <footer>
+        Return to <a href="../index.html">Home Page</a>
+    </footer>
+    <!-- End Footer -->
+    <!-- Start External Javascript files -->
+    <script src="shop.js"></script>
+    <!-- End Eternal Javascript files -->
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+/* 
+    Author: Amritpal Singh
+ */
+
+/* styles for body */
+
+body {
+  background-color: #ebeef1;
+}
+
+/* styles for heading tags */
+
+h2 {
+  width: fit-content;
+  margin: 0px auto;
+  font-family: sans-serif;
+  padding: 20px;
+  text-align: center;
+  font-weight: bolder;
+  text-shadow: 2px 2px grey;
+}
+
+h3 {
+  width: fit-content;
+  margin: 0px auto;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/* styles for main section */
+
+main {
+  width: 1000px;
+  margin: 20px auto;
+  font-family: sans-serif;
+  padding: 0px 30px;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 0px 0px 6px 3px grey;
+  background-color: #d4f1f4;
+}
+
+main img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+main p {
+  padding-top: 10px;
+  margin-left: 15px;
+}
+
+#addToCartButton {
+  margin-top: 20px;
+}
